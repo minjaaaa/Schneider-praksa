@@ -1,4 +1,4 @@
-from fetch_text import extract_text_from_pdf
+import fitz
 from train_model import setup_index
 from sentence_transformers import SentenceTransformer
 import faiss
@@ -51,6 +51,18 @@ def create_model(urls):
         }
     
     return results
+
+def extract_text_from_pdf():
+    # Open PDF from local path
+    doc = fitz.open("C:/Schneider praksa/data/Disertacija_17125.pdf")
+
+    text = ""
+    for page in doc:
+        page_text = page.get_text("text").replace("\x00", "")
+        text += page_text + "\n"
+
+    doc.close()
+    return text
 
 def chunk_text(text, chunk_size=400):
     sentences = re.split(r'(?<=[.!?]) +', text)
