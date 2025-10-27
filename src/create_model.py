@@ -1,5 +1,4 @@
 import fitz
-from train_model import setup_index
 from sentence_transformers import SentenceTransformer
 import faiss
 import re
